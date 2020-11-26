@@ -9,7 +9,7 @@ class Edit extends Component
 {
     public $note;
 
-    public $rules = [
+    protected $rules = [
         'note.contents' => 'nullable',
         'note.user_id' => 'required',
         'note.date' => 'required'
