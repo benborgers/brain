@@ -1,0 +1,5 @@
+.trix-button-group--file-tools,
+.trix-button-group-spacer,
+.trix-button-group--history-tools {
+    display: none !important;
+}
