@@ -10,11 +10,11 @@ class Tags extends Component
     public $allTags;
     public $tagSearch = '';
     public $tagResults = [];
-    public $selectedTag = '';
+    public $selected = '';
     public $noteResults = [];
 
     protected $queryString = [
-        'selectedTag' => ['except' => '']
+        'selected' => ['except' => '']
     ];
 
     public function mount()
@@ -27,9 +27,9 @@ class Tags extends Component
         
         $this->updatedTagSearch();
 
-        if(! empty($this->selectedTag)) {
+        if(! empty($this->selected)) {
             // If query string is populated
-            $this->updatedSelectedTag();
+            $this->updatedSelected();
         }
     }
 
@@ -48,11 +48,11 @@ class Tags extends Component
         }
     }
 
-    public function updatedSelectedTag()
+    public function updatedSelected()
     {
         $this->noteResults = auth()->user()->notes()
             ->latestByDate()
-            ->whereJsonContains('tags', $this->selectedTag)
+            ->whereJsonContains('tags', $this->selected)
             ->get();
     }
 }
