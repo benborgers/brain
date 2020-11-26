@@ -13,6 +13,7 @@
         </title>
         <link rel="icon" href="http://emojicdn.elk.sh/🧠" />
 
+        <style>[x-cloak] { display: none !important; }</style>
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
         <script>
@@ -69,6 +70,31 @@
 
                     <p class="text-center mt-8 font-medium text-sm text-gray-300">Your memory is bad, but computer can help. </p>
                 </main>
+            </div>
+
+            {{-- Privacy screen - activate by pressing shift twice --}}
+            <div
+                x-data="{ lastPress: 0, show: false }"
+                x-on:keydown.window.shift="
+                    const now = new Date().getTime()
+                    if(now - lastPress < 200) {
+                        show = !show
+                    }
+                    lastPress = now
+                "
+                x-init="$watch('show', value => {
+                    if(value === true) {
+                        document.body.classList.add('fixed', 'overflow-hidden')
+                    } else {
+                        document.body.classList.remove('fixed', 'overflow-hidden')
+                    }
+                })"
+            >
+                <div
+                    x-cloak
+                    x-show="show"
+                    class="bg-black h-screen w-screen inset-0 absolute"
+                ></div>
             </div>
         @endauth
 
