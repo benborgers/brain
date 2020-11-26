@@ -11,7 +11,7 @@
             @endif
             Brain
         </title>
-        <link rel="icon" href="http://emojicdn.elk.sh/🧠" />
+        <link rel="icon" href="https://emojicdn.elk.sh/🧠" />
 
         <style>[x-cloak] { display: none !important; }</style>
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
