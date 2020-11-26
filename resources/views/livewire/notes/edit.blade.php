@@ -15,7 +15,7 @@
                 const debounce = 1000
                 setTimeout(() => {
                     const delta = new Date().getTime() - lastTyped
-                    if(delta > debounce - 100) {
+                    if(delta > debounce - 10) {
                         $wire.saveContents($refs.input.value)
                     }
                 }, debounce)"
