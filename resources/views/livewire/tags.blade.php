@@ -24,7 +24,7 @@
 
         <div class="space-y-4 ml-2">
             @foreach ($noteResults as $note)
-                <x-note-search-result :note="$note" :highlight="$selected" />
+                <x-note-search-result :note="$note" :highlight="'[[' . $selected . ']]'" />
             @endforeach
         </div>
     @endif

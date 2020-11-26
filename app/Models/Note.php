@@ -48,11 +48,16 @@ class Note extends Model
         $output = [];
         $contents = $this->contentsWithoutHtml();
         $lowercaseContents = strtolower($contents);
-        preg_match_all('/' . preg_quote($string) . '/', $lowercaseContents, $matches, PREG_OFFSET_CAPTURE);
 
-        foreach($matches[0] as $match) {
-            $position = $match[1];
+        $positions = [];
+        for($i = 0; $i < mb_strlen($lowercaseContents); $i++) {
+            $pos = mb_strpos($lowercaseContents, $string, $i);
+            if($pos === $i) {
+                $positions[] = $pos;
+            }
+        }
 
+        foreach($positions as $position) {
             $padding = 30;
 
             $firstStart = $position - $padding;
@@ -63,11 +68,11 @@ class Note extends Model
                 $firstLength = $position;
             }
 
-            $output[] = substr($contents, $firstStart, $firstLength)
+            $output[] = mb_substr($contents, $firstStart, $firstLength)
                         . '<mark class="bg-yellow-200 text-yellow-900">'
-                        . substr($contents, $position, strlen($string))
+                        . mb_substr($contents, $position, mb_strlen($string))
                         . '</mark>'
-                        . substr($contents, $position + strlen($string), $padding);
+                        . mb_substr($contents, $position + mb_strlen($string), $padding);
         }
 
         return $output;
