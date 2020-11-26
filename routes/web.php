@@ -11,7 +11,7 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('/n/{date}', Livewire\Notes\Edit::class)->name('note.edit');
     Route::view('/today', 'today')->name('today');
     Route::get('/tags', Livewire\Tags::class)->name('tags');
