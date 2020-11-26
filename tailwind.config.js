@@ -4,7 +4,7 @@ module.exports = {
     purge: [
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
+        './resources/views/**/*.blade.php'
     ],
 
     theme: {
@@ -12,12 +12,15 @@ module.exports = {
             colors: {
                 rose: colors.rose
             }
-        },
+        }
     },
 
     variants: {
-        opacity: ['responsive', 'hover', 'focus', 'disabled'],
+        opacity: ['responsive', 'hover', 'focus', 'disabled']
     },
 
-    plugins: [require('@tailwindcss/typography')],
+    plugins: [
+        require('@tailwindcss/typography'),
+        require('@tailwindcss/forms')
+    ]
 };

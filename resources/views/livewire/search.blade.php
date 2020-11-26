@@ -1,7 +1,7 @@
 @section('title', 'Search notes')
 
 <div>
-    <x-big-input wire:model="search" placeholder="Search your notes..." />
+    <x-big-input wire:model="search" placeholder="Search your notes..." autofocus />
 
     <div class="space-y-4 ml-2">
         @forelse ($results as $note)
