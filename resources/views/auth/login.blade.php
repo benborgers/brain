@@ -37,7 +37,7 @@
 
             <div class="space-y-1">
                 <a class="block underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
-                    Already have an account?
+                    Don’t have an account yet?
                 </a>
 
                 @if (Route::has('password.request'))
