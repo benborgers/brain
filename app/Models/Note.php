@@ -58,7 +58,7 @@ class Note extends Model
         }
 
         foreach($positions as $position) {
-            $padding = 30;
+            $padding = 40;
 
             $firstStart = $position - $padding;
             $firstLength = $padding;
@@ -68,11 +68,14 @@ class Note extends Model
                 $firstLength = $position;
             }
 
-            $output[] = mb_substr($contents, $firstStart, $firstLength)
+            $line = mb_substr($contents, $firstStart, $firstLength)
                         . '<mark class="bg-yellow-200 text-yellow-900">'
                         . mb_substr($contents, $position, mb_strlen($string))
                         . '</mark>'
                         . mb_substr($contents, $position + mb_strlen($string), $padding);
+            
+            $output[] = Str::of($line)
+                ->trim();
         }
 
         return $output;
