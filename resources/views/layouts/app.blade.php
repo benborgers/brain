@@ -16,9 +16,7 @@
         <style>[x-cloak] { display: none !important; }</style>
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
-        <script>
-            window.NOTE_EDIT_ROUTE = "{{ route('note.edit', '__replace__') }}"
-        </script>
+        @include('includes/frontend-variables')
         <script src="{{ mix('js/app.js') }}" defer></script>
         
         @livewireStyles
