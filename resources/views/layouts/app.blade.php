@@ -37,7 +37,7 @@
                         ] as $name => $url)
                             <a
                                 href="{{ $url }}"
-                                class="block py-5 font-medium border-b-2 border-transparent transition-colors duration-200 hover:text-gray-600 hover:border-gray-200
+                                class="block py-5 font-medium border-b-2 border-transparent transition-colors duration-200 hover:text-gray-600 hover:border-gray-300
                                 @if(request()->url() === $url) border-rose-500 text-rose-600 @else text-gray-500 @endif"
                                 @if($name === 'Today')
                                     x-data
