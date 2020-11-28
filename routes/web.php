@@ -16,4 +16,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::view('/today', 'today')->name('today');
     Route::get('/tags', Livewire\Tags::class)->name('tags');
     Route::get('/search', Livewire\Search::class)->name('search');
+    Route::get('/calendar', Livewire\Calendar::class)->name('calendar');
 });

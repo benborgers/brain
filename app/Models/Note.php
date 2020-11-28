@@ -85,4 +85,9 @@ class Note extends Model
     {
         return $query->orderByDesc('date');
     }
+
+    public function scopeOldestByDate($query)
+    {
+        return $query->orderBy('date');
+    }
 }

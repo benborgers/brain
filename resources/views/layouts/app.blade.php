@@ -32,6 +32,7 @@
                     <div class="flex space-x-6 items-center">
                         @foreach ([
                             'Today' => route('today'),
+                            'Calendar' => route('calendar'),
                             'Tags' => route('tags'),
                             'Search' => route('search')
                         ] as $name => $url)
