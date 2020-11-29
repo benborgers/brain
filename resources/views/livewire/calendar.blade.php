@@ -1,3 +1,5 @@
+@section('title', 'Calendar')
+
 <div>
     <div class="grid grid-cols-7 gap-x-4 gap-y-6">
         @foreach ($dates as $date)
