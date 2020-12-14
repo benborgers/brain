@@ -11,12 +11,13 @@ class Calendar extends Component
 {
     public function render()
     {
-        $firstNote = auth()->user()->notes()
-            ->oldestByDate()
-            ->firstOrNew();
+        $notes = auth()->user()->notes()
+            ->get('date');
+
+        $firstNote = $notes->sortBy('date')->first();
 
         $period = array_reverse(CarbonPeriod::create(
-            $firstNote->dateAsCarbon()->startOfWeek(),
+            $firstNote ? $firstNote->dateAsCarbon()->startOfWeek() : now(),
             now()->addWeek()->startOfWeek()->subDay()
         )->toArray());
 
@@ -24,15 +25,30 @@ class Calendar extends Component
         $reversedWeeks = [];
 
         foreach($weeks as $week) {
-            $reversedWeeks[] = array_reverse($week);
+            $output = [];
+            $weekHasANote = false;
+
+            foreach($week as $date) {
+                $note = $notes->where('date', $date->format('Y-m-d'))->first();
+                if($note) $weekHasANote = true;
+                $output[] = [
+                    'date' => $date,
+                    'note' => $note
+                ];
+            }
+
+            if($weekHasANote) $reversedWeeks[] = array_reverse($output);
         }
 
-        $notes = auth()->user()->notes()
-            ->get('date');
+        $dates = [];
+        foreach($reversedWeeks as $week) {
+            foreach($week as $day) {
+                $dates[] = $day;
+            }
+        }
 
         return view('livewire.calendar', [
-            'dates' => Arr::flatten($reversedWeeks),
-            'notes' => $notes
+            'dates' => $dates
         ]);
     }
 }
