@@ -13,8 +13,8 @@ class Calendar extends Component
     {
         $firstNote = auth()->user()->notes()
             ->oldestByDate()
-            ->first();
-        
+            ->firstOrNew();
+
         $period = array_reverse(CarbonPeriod::create(
             $firstNote->dateAsCarbon()->startOfWeek(),
             now()->addWeek()->startOfWeek()->subDay()
