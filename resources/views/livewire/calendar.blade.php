@@ -8,7 +8,7 @@
 
         @foreach($dates as $day)
             @if($day['note'])
-                <a href="{{ route('note.edit', $day['date']) }}">
+                <a href="{{ route('note.edit', $day['note']->date) }}">
                     <div class="bg-gray-100 shadow py-2 px-3 rounded duration-150 hover:bg-rose-100 group">
                         <p class="text-gray-800 font-bold text-center duration-150 group-hover:text-rose-700">{{ $day['date']->format('jS')}}</p>
                         <p class="text-gray-500 text-sm text-center duration-150 group-hover:text-rose-700">{{ $day['date']->format('F') }}</p>
