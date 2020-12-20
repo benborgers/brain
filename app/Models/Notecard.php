@@ -23,9 +23,11 @@ class Notecard extends Model
             $this->markdown
         );
 
-        // Decrease level of headings
         return Str::of($html)
-            ->replaceMatches('/<(\/?)h([1-6])>/', fn ($match) => '<' . $match[1] . 'h' . ($match[2] + 1) . '>');
+            // Decrease level of headings
+            ->replaceMatches('/<(\/?)h([1-6])>/', fn ($match) => '<' . $match[1] . 'h' . ($match[2] + 1) . '>')
+            // Open links in new tab.
+            ->replaceMatches('/<a/', '<a target="_blank"');
     }
 
     public function folder()
