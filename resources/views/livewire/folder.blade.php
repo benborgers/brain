@@ -1,3 +1,5 @@
+@section('title', $folder->name)
+
 <div>
     <div class="flex items-center space-x-4 border-b border-gray-200 -ml-6 -mr-6 px-6 pb-6 mb-8">
         <input type="text" wire:model="folder.name" class="bg-transparent p-0 border-none focus:ring-0 text-3xl font-extrabold text-gray-900 w-full" />
