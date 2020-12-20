@@ -24,7 +24,7 @@
 
     <div class="space-y-4">
         @forelse ($notecards as $notecard)
-            @livewire('notecard', [ 'notecard' => $notecard, 'embedded' => true ])
+            @livewire('notecard', [ 'notecard' => $notecard, 'embedded' => true ], key($notecard->id))
         @empty
             <p class="text-gray-400 font-medium mt-12">No notecards here yet.</p>
         @endforelse
