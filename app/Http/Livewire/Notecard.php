@@ -13,6 +13,7 @@ class Notecard extends Component
     public Folder $folder;
     public $mode = 'read'; // 'read' or 'edit'
     public $create = false; // are we on create route?
+    public $embedded = false;
 
     protected $rules = [
         'notecard.title' => 'nullable|max:255',

@@ -22,16 +22,18 @@
 
         @stack('head')
     </head>
-    <body class="font-sans antialiased bg-gray-100 text-gray-700">
+    <body class="font-sans antialiased bg-gray-50 text-gray-700">
         @auth
-            @sectionMissing('hide-sidebar')
-                <div>
-                    @livewire('sidebar')
-                </div>
-            @endif
-           <main>
-               {{ $slot }}
-           </main>
+            <div>
+                @sectionMissing('hide-sidebar')
+                    <div class="border-r h-screen p-4 w-96 fixed top-0 left-0">
+                        @livewire('sidebar')
+                    </div>
+                @endif
+               <main class="p-6 @sectionMissing('hide-sidebar') ml-96 @endif">
+                   {{ $slot }}
+               </main>
+            </div>
         @endauth
 
         @guest

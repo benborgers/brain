@@ -15,4 +15,9 @@ class Folder extends Model
     {
         return $this->belongsTo('App\Models\User', 'user_id');
     }
+
+    public function notecards()
+    {
+        return $this->hasMany('App\Models\Notecard');
+    }
 }

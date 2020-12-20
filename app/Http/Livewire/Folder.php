@@ -19,4 +19,17 @@ class Folder extends Component
         $this->folder->save();
         $this->emitTo('sidebar', 'refresh');
     }
+
+    public function deleteFolder()
+    {
+        $this->folder->delete();
+        return redirect()->route('home');
+    }
+
+    public function render()
+    {
+        return view('livewire.folder', [
+            'notecards' => $this->folder->notecards()->orderByDesc('updated_at')->get()
+        ]);
+    }
 }

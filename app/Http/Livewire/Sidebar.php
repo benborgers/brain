@@ -24,16 +24,21 @@ class Sidebar extends Component
         $this->reset('newFolderName');
     }
 
+    private function getFoldersWithParent($parent)
+    {
+        return auth()->user()->folders()
+            ->where('parent', $parent)
+            ->orderBy('order')
+            ->get();
+    }
+
     // Direction is either 'up' or 'down'.
     public function reorder($folderId, $direction)
     {
         $folder = auth()->user()->folders()->findOrFail($folderId);
 
         // Get all folders in the same level.
-        $foldersAtLevel = auth()->user()->folders()
-            ->where('parent', $folder->parent)
-            ->orderBy('order')
-            ->get();
+        $foldersAtLevel = $this->getFoldersWithParent($folder->parent);
 
         // Start by assigning them the existing order.
         foreach($foldersAtLevel as $i => $folder) {
@@ -57,6 +62,24 @@ class Sidebar extends Component
         }
 
         $foldersAtLevel->each(fn ($folder) => $folder->save());
+    }
+
+    public function indent($folderId, $direction)
+    {
+        $folder = auth()->user()->folders()->findOrFail($folderId);
+
+        $foldersAtLevel = $this->getFoldersWithParent($folder->parent);
+
+        foreach($foldersAtLevel as $i => $folder) {
+            if($folder->id === $folderId) {
+                if($direction === 'in') {
+                    $folder->parent = $foldersAtLevel[$i - 1]->id;
+                } else if($direction === 'out') {
+                    $folder->parent = auth()->user()->folders()->find($folder->parent)->parent;
+                }
+                $folder->save();
+            }
+        }
     }
 
     public function render()
