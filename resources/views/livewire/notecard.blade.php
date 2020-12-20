@@ -1,7 +1,9 @@
-@push('head')
-    <link rel="stylesheet" href="https://unpkg.com/katex@0.12.0/dist/katex.min.css" />
-    <script src="https://unpkg.com/katex@0.12.0/dist/katex.min.js"></script>
-@endpush
+@once
+    @push('head')
+        <link rel="stylesheet" href="https://unpkg.com/katex@0.12.0/dist/katex.min.css" />
+        <script src="https://unpkg.com/katex@0.12.0/dist/katex.min.js"></script>
+    @endpush
+@endonce
 
 @unless($embedded)
     @section('hide-sidebar', true)
