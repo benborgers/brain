@@ -17,4 +17,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/tags', Livewire\Tags::class)->name('tags');
     Route::get('/search', Livewire\Search::class)->name('search');
     Route::get('/calendar', Livewire\Calendar::class)->name('calendar');
+
+    Route::get('/export', function () {
+        return response()->json(auth()->user()->notes()->get());
+    });
 });
