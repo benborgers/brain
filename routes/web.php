@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire;
 
-Route::get('/', fn() => redirect()->route('login'));
+Route::get('/', fn() => redirect()->route('home'));
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/home', Livewire\Home::class)->name('home');
