@@ -12,6 +12,9 @@ module.exports = {
             colors: {
                 rose: colors.rose,
                 gray: colors.blueGray
+            },
+            fontFamily: {
+                sans: ['Nunito', 'sans-serif']
             }
         }
     },
