@@ -1,1 +1,0 @@
-<div class="h-1 bg-blue-100 absolute w-full top-0 inset-x-0 opacity-0 duration-100" wire:loading.class="opacity-100"></div>

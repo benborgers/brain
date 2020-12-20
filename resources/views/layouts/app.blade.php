@@ -16,7 +16,6 @@
         <style>[x-cloak] { display: none !important; }</style>
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
-        @include('includes/frontend-variables')
         <script src="{{ mix('js/app.js') }}" defer></script>
 
         @livewireStyles
@@ -25,7 +24,12 @@
     </head>
     <body class="font-sans antialiased bg-gray-100 text-gray-700">
         @auth
-           {{ $slot }}
+            <div>
+                @livewire('sidebar')
+            </div>
+           <main>
+               {{ $slot }}
+           </main>
         @endauth
 
         @guest
