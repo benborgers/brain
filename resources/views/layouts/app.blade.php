@@ -26,13 +26,17 @@
     </head>
     <body class="font-sans antialiased bg-gray-50 text-gray-700">
         @auth
-            <div>
+            <div
+                @sectionmissing('hide-sidebar')
+                    class="md:grid" style="grid-template-columns: 20rem 1fr"
+                @endif
+            >
                 @sectionMissing('hide-sidebar')
-                    <div class="border-r h-screen p-4 w-96 fixed top-0 left-0">
+                    <div class="border-r md:h-screen p-4 md:sticky top-0 left-0">
                         @livewire('sidebar')
                     </div>
                 @endif
-               <main class="p-6 @sectionMissing('hide-sidebar') ml-96 @endif">
+               <main class="p-4 md:p-6 w-full">
                    {{ $slot }}
                </main>
             </div>
