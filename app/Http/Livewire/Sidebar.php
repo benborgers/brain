@@ -8,10 +8,12 @@ class Sidebar extends Component
 {
     public $newFolderName = '';
 
+    protected $listeners = ['refresh' => '$refresh'];
+
     public function createFolder()
     {
         $this->validate(
-            [ 'newFolderName' => 'required' ],
+            [ 'newFolderName' => 'required|max:255' ],
             [ 'newFolderName.required' => 'Your new folder needs a name.' ]
         );
 

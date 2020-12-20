@@ -24,9 +24,11 @@
     </head>
     <body class="font-sans antialiased bg-gray-100 text-gray-700">
         @auth
-            <div>
-                @livewire('sidebar')
-            </div>
+            @sectionMissing('hide-sidebar')
+                <div>
+                    @livewire('sidebar')
+                </div>
+            @endif
            <main>
                {{ $slot }}
            </main>
