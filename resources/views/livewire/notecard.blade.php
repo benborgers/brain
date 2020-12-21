@@ -38,7 +38,7 @@
                     katex.renderToString(equation, { throwOnError: false }))"
             >
                 @if($embedded) <a href="{{ route('notecard.show', $notecard) }}"> @endif
-                    <h1 class="text-3xl font-extrabold text-gray-900 mb-4">{{ $notecard->title }}</h1>
+                    <h1 class="text-2xl font-extrabold text-gray-900 mb-4">{{ $notecard->title }}</h1>
                 @if($embedded) </a> @endif
                 <div class="prose" x-ref="markdown">
                     {!! $notecard->toHtml() !!}
@@ -51,7 +51,7 @@
                     autofocus
                     wire:model.defer="notecard.title"
                     placeholder="Title"
-                    class="w-full p-0 border-none focus:ring-0 text-3xl font-extrabold text-gray-900"
+                    class="w-full p-0 border-none focus:ring-0 text-2xl font-extrabold text-gray-900"
                 />
                 <textarea
                     wire:model.defer="notecard.markdown"
