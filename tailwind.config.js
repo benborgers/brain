@@ -15,7 +15,16 @@ module.exports = {
             },
             fontFamily: {
                 sans: ['Nunito', 'sans-serif']
-            }
+            },
+            typography: theme => ({
+                DEFAULT: {
+                    css: {
+                        strong: {
+                            fontWeight: theme('fontWeight.bold')
+                        }
+                    }
+                }
+            })
         }
     },
 
