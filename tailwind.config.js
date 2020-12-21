@@ -11,7 +11,7 @@ module.exports = {
         extend: {
             colors: {
                 rose: colors.rose,
-                gray: colors.blueGray
+                gray: colors.warmGray
             },
             fontFamily: {
                 sans: ['Nunito', 'sans-serif']
