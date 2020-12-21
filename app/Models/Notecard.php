@@ -24,8 +24,6 @@ class Notecard extends Model
         );
 
         return Str::of($html)
-            // Decrease level of headings
-            ->replaceMatches('/<(\/?)h([1-6])>/', fn ($match) => '<' . $match[1] . 'h' . ($match[2] + 1) . '>')
             // Open links in new tab.
             ->replaceMatches('/<a/', '<a target="_blank"');
     }
