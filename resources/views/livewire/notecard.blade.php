@@ -79,7 +79,7 @@
                     <div class="flex items-center space-x-2">
                         @unless($create)
                             <p class="text-gray-500">Folder:</p>
-                            <select wire:model="notecard.folder_id" class="bg-transparent py-2 leading-none bg-white rounded-lg border-gray-300 focus:ring-0 focus:border-gray-300">
+                            <select wire:model.defer="notecard.folder_id" class="bg-transparent py-2 leading-none bg-white rounded-lg border-gray-300 focus:ring-0 focus:border-gray-300">
                                 @foreach (auth()->user()->folders()->orderBy('name')->get() as $folder)
                                     <option value="{{ $folder->id }}">{{ $folder->name }}</option>
                                 @endforeach
