@@ -3,7 +3,7 @@
         <p class="mb-4 inline-block text-2xl">🧠</p>
     </a>
 
-    <x-folder-level :folders="$allFolders->whereNull('parent')" :allFolders="$allFolders" />
+    <x-folder-level :folders="$allFolders->whereNull('parent')" :allFolders="$allFolders" :currentUrl="$currentUrl" />
 
     {{-- Create new folder --}}
     <form wire:submit.prevent="createFolder" class="mt-12 flex space-x-2 w-full bg-white border border-gray-200 py-2 px-3 rounded-lg">

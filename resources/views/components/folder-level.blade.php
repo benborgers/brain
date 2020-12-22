@@ -1,4 +1,4 @@
-@props(['folders', 'allFolders', 'level' => 0])
+@props(['folders', 'allFolders', 'level' => 0, 'currentUrl'])
 
 <div style="margin-left: {{ $level * 8 }}px">
     @foreach ($folders->sortBy('order') as $folder)
@@ -13,7 +13,7 @@
             <div
                 class="flex items-center space-x-3 group px-2 py-1 rounded-lg border border-transparent text-gray-500
                     hover:bg-white hover:border-gray-200 hover:text-gray-900 transition-150 transition-colors
-                    @if(url()->current() === $url) bg-white border-gray-200 text-gray-900 @endif"
+                    @if($currentUrl === $url) bg-white border-gray-200 text-gray-900 @endif"
             >
                 <div class="flex space-x-2">
                     @if($hasChildren)
@@ -51,7 +51,7 @@
             </div>
             @if($hasChildren)
                 <div x-show="expandChildren">
-                    <x-folder-level :folders="$allFolders->where('parent', $folder->id)" :allFolders="$allFolders" :level="$level + 1" />
+                    <x-folder-level :folders="$allFolders->where('parent', $folder->id)" :allFolders="$allFolders" :currentUrl="$currentUrl" :level="$level + 1" />
                 </div>
             @endif
         </div>

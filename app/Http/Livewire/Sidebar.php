@@ -7,8 +7,14 @@ use Livewire\Component;
 class Sidebar extends Component
 {
     public $newFolderName = '';
+    public $currentUrl;
 
     protected $listeners = ['refresh' => '$refresh'];
+
+    public function mount()
+    {
+        $this->currentUrl = url()->current();
+    }
 
     public function createFolder()
     {
