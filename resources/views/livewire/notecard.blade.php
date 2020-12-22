@@ -21,7 +21,7 @@
         </a>
     @endunless
 
-    <div class="bg-white rounded-lg p-6 border border-gray-200 max-w-screen-sm mx-auto">
+    <div class="bg-white rounded-lg p-6 border border-gray-200 max-w-screen-sm mx-auto overflow-hidden">
         @if($create === false && $mode === 'read')
             <div class="flex justify-end">
                 <button class="{{ $iconClass }}" wire:click="toggleMode" wire:key="toggle-mode-{{ $notecard->id }}">
@@ -79,7 +79,7 @@
                     wire:ignore {{-- so dom diffing doesn't change height --}}
                 ></textarea>
 
-                <div class="mt-6 flex items-center justify-between bg-gray-200 -mb-6 -mx-6 px-6 py-3">
+                <div class="mt-6 flex items-center justify-between bg-gray-100 -mb-6 -mx-6 px-6 py-3">
                     <div class="flex items-center space-x-2">
                         @unless($create)
                             <p class="text-gray-500">Folder:</p>
@@ -102,7 +102,7 @@
                                 <x-heroicon-o-trash class="h-4" />
                             </button>
                         @endunless
-                        <input type="submit" value="{{ $this->notecard->exists ? 'Save' : 'Create' }}" class="cursor-pointer bg-rose-200 border border-rose-300 text-rose-700 py-1 px-3 rounded-lg font-semibold focus:outline-none">
+                        <input type="submit" value="{{ $this->notecard->exists ? 'Save' : 'Create' }}" class="cursor-pointer bg-rose-200 text-rose-700 leading-none py-2 px-3 rounded-lg font-semibold focus:outline-none">
                     </div>
                 </div>
             </form>
