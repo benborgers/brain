@@ -26,5 +26,9 @@
                 {{ $name }}
             </a>
         @endforeach
+        <form action="{{ route('logout') }}" method="post">
+            @csrf
+            <input type="submit" value="Log out" class="block cursor-pointer w-full px-4 py-2 bg-white text-left hover:bg-gray-100 transition-colors duration-100 focus:outline-none" />
+        </form>
     </div>
 </div>
