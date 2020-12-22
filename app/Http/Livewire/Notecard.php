@@ -20,8 +20,8 @@ class Notecard extends Component
     public $currentUrl;
 
     protected $rules = [
-        'notecard.title' => 'nullable|max:255',
-        'notecard.markdown' => 'nullable',
+        'notecard.title' => 'required|max:255',
+        'notecard.markdown' => 'required',
         'notecard.folder_id' => 'integer'
     ];
 

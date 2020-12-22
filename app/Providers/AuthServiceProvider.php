@@ -34,6 +34,8 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('see-notecard', function ($user = null, Notecard $notecard) {
+            if(! $notecard->exists) return true;
+
             if($notecard->folder->owner->is($user)) {
                 return true;
             }
@@ -45,6 +47,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('edit-notecard', function ($user, Notecard $notecard) {
+            if(! $notecard->exists) return true;
             return $notecard->folder->owner->is($user);
         });
     }

@@ -22,7 +22,7 @@ class Notecard extends Model
         $converter = new CommonMarkConverter([ 'html_input' => 'escape' ], $environment);
 
         $html = $converter->convertToHTML(
-            $this->markdown
+            $this->markdown || ''
         );
 
         return Str::of($html)
