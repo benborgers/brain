@@ -15,7 +15,7 @@
                     <p class="text-gray-400">{{ $notecardsCount }} {{ Str::plural('notecard', $notecardsCount) }}</p>
                 </div>
 
-                <div x-data="{ show: false }">
+                <div x-data="{ show: false }" x-cloak>
                     <button class="focus:outline-none bg-gray-200 leading-none py-1 px-3 text-gray-800 text-sm font-bold rounded-full" x-on:click="show = !show">
                         <span x-show="!show">Select notecards</span>
                         <span x-show="show">Hide notecards</span>
