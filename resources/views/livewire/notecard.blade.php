@@ -33,15 +33,29 @@
 
         @if($mode === 'read')
             <div
-                x-data
-                x-init="$refs.markdown.innerHTML = $refs.markdown.innerHTML.replace(/\$\$(.*?)\$\$/g, (_, equation) =>
-                    katex.renderToString(equation, { throwOnError: false }))"
+                x-data="{ collapsed: false }"
+                x-init="(() => {
+                    $refs.markdown.innerHTML = $refs.markdown.innerHTML.replace(/\$\$(.*?)\$\$/g, (_, equation) =>
+                        katex.renderToString(equation, { throwOnError: false }))
+                    if($el.getBoundingClientRect().height > 400 && {{ $embedded ? 'true' : 'false' }}) {
+                        collapsed = true
+                    }
+                })()"
+                class="relative"
             >
                 @if($embedded) <a href="{{ route('notecard.show', $notecard) }}"> @endif
                     <h1 class="text-2xl font-extrabold text-gray-900 mb-4 inline-block">{{ $notecard->title }}</h1>
                 @if($embedded) </a> @endif
-                <div class="prose" x-ref="markdown">
+                <div class="prose" x-ref="markdown" :class="{ 'max-h-96 overflow-hidden': collapsed }">
                     {!! $notecard->toHtml() !!}
+                </div>
+
+                {{-- Overlay for when collapsed --}}
+                <div x-show="collapsed">
+                    <div class="h-24 bg-gradient-to-t from-gray-900 to-transparent opacity-30 absolute bottom-0 inset-x-0 -mb-6 -mx-6 rounded-b-lg z-0"></div>
+                    <button class="absolute rounded-full py-1 px-3 bg-white bottom-0 focus:outline-none text-gray-400 transition-colors duration-150 hover:text-rose-600" x-on:click="collapsed = false">
+                        <x-heroicon-s-chevron-down class="h-4" />
+                    </button>
                 </div>
             </div>
         @elseif($mode === 'edit')
