@@ -1,12 +1,13 @@
 @props(['folders', 'allFolders', 'level' => 0])
 
-<div style="margin-left: {{ $level * 8 }}px" class="space-y-1">
+<div style="margin-left: {{ $level * 8 }}px">
     @foreach ($folders->sortBy('order') as $folder)
         @php($hasChildren = $allFolders->where('parent', $folder->id)->count() > 0)
 
         <div
             x-data="{ expandChildren: localStorage.getItem('brain-sidebar-expand-{{ $folder->id }}') === 'true' ? true : false }"
             x-init="$watch('expandChildren', value => localStorage.setItem('brain-sidebar-expand-{{ $folder->id }}', value))"
+            class="my-1"
         >
             @php($url = route('folder.show', $folder))
             <div
