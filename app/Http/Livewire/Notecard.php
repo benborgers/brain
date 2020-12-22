@@ -17,7 +17,8 @@ class Notecard extends Component
 
     protected $rules = [
         'notecard.title' => 'nullable|max:255',
-        'notecard.markdown' => 'nullable'
+        'notecard.markdown' => 'nullable',
+        'notecard.folder_id' => 'integer'
     ];
 
     public function mount(NotecardModel $notecard)
@@ -32,8 +33,13 @@ class Notecard extends Component
 
             $this->create = true;
         } else {
-            $this->folder = Folder::find($this->notecard->folder_id);
+            $this->setFolderFromNotecard();
         }
+    }
+
+    private function setFolderFromNotecard()
+    {
+        $this->folder = Folder::find($this->notecard->folder_id);
     }
 
     public function save()
@@ -48,6 +54,8 @@ class Notecard extends Component
             return redirect()->route('notecard.show', $this->notecard);
         } else {
             $this->mode = 'read';
+
+            $this->setFolderFromNotecard();
         }
     }
 

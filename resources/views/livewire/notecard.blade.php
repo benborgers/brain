@@ -11,6 +11,8 @@
     @section('hide-sidebar', true)
 @endunless
 
+@php($iconClass = 'text-gray-500 hover:text-gray-800 duration-150 transition-colors focus:outline-none')
+
 <div>
     @unless($embedded)
         <a href="{{ route('folder.show', $folder) }}" class="mb-8 flex space-x-2 items-center duration-100">
@@ -22,18 +24,9 @@
     <div class="bg-white rounded-lg p-6 border border-gray-200 max-w-screen-sm mx-auto">
         @if($create === false && $mode === 'read')
             <div class="flex justify-end">
-                <div class="flex items-center space-x-4">
-                    @php($class = 'text-gray-500 hover:text-gray-800 duration-150 transition-colors focus:outline-none')
-                    @unless($embedded)
-                        <button class="{{ $class }}" x-data x-on:click="confirm('Are you sure you want to delete this notecard?') && $wire.destroy()">
-                            <x-heroicon-o-trash class="h-4" />
-                        </button>
-                    @endunless
-
-                    <button class="{{ $class }}" wire:click="toggleMode">
-                        <x-heroicon-o-pencil class="h-4" />
-                    </button>
-                </div>
+                <button class="{{ $iconClass }}" wire:click="toggleMode" wire:key="toggle-mode-{{ $notecard->id }}">
+                    <x-heroicon-o-pencil class="h-4" />
+                </button>
             </div>
         @endif
 
@@ -67,13 +60,13 @@
                 </div>
             </div>
         @elseif($mode === 'edit')
-            <form wire:submit.prevent="save" class="space-y-4">
+            <form wire:submit.prevent="save">
                 <input
                     type="text"
                     autofocus
                     wire:model.defer="notecard.title"
                     placeholder="Title"
-                    class="w-full p-0 border-none focus:ring-0 text-2xl font-extrabold text-gray-900"
+                    class="w-full p-0 border-none focus:ring-0 text-2xl font-extrabold text-gray-900 mb-4"
                 />
                 <textarea
                     wire:model.defer="notecard.markdown"
@@ -83,8 +76,35 @@
                     x-on:keydown.tab.prevent="$el.setRangeText('  ', $el.selectionStart, $el.selectionStart, 'end')"
                     x-init="resize()"
                     x-on:input="resize()"
+                    wire:ignore {{-- so dom diffing doesn't change height --}}
                 ></textarea>
-                <input type="submit" value="{{ $this->notecard->exists ? 'Save' : 'Create' }}" class="cursor-pointer bg-rose-200 text-rose-700 py-1 px-3 rounded-lg font-semibold focus:outline-none">
+
+                <div class="mt-6 flex items-center justify-between bg-gray-200 -mb-6 -mx-6 px-6 py-3">
+                    <div class="flex items-center space-x-2">
+                        @unless($create)
+                            <p class="text-gray-500">Folder:</p>
+                            <select wire:model="notecard.folder_id" class="bg-transparent py-2 leading-none bg-white rounded-lg border-gray-300 focus:ring-0 focus:border-gray-300">
+                                @foreach (auth()->user()->folders()->orderBy('name')->get() as $folder)
+                                    <option value="{{ $folder->id }}">{{ $folder->name }}</option>
+                                @endforeach
+                            </select>
+                        @endunless
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        @unless($create)
+                            <button
+                                class="{{ $iconClass }}"
+                                x-data x-on:click="confirm('Are you sure you want to delete this notecard?') && $wire.destroy()"
+                                wire:key="delete-{{ $notecard->id }}"
+                                type="button" {{-- To stop form from submitting --}}
+                            >
+                                <x-heroicon-o-trash class="h-4" />
+                            </button>
+                        @endunless
+                        <input type="submit" value="{{ $this->notecard->exists ? 'Save' : 'Create' }}" class="cursor-pointer bg-rose-200 border border-rose-300 text-rose-700 py-1 px-3 rounded-lg font-semibold focus:outline-none">
+                    </div>
+                </div>
             </form>
         @endif
     </div>

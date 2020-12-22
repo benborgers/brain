@@ -14,7 +14,7 @@
             </button>
             <a
                 href="{{ route('notecard.create', [ 'folder' => $folder->id ]) }}"
-                class="whitespace-nowrap bg-rose-200 text-rose-700 py-1 px-3 rounded-lg font-semibold"
+                class="whitespace-nowrap bg-rose-200 text-rose-700 leading-none py-2 px-3 rounded-lg font-semibold"
             >
                 Create a notecard
             </a>
