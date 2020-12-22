@@ -52,10 +52,12 @@
 
                 {{-- Overlay for when collapsed --}}
                 <div x-show="collapsed">
-                    <div class="h-24 bg-gradient-to-t from-gray-900 to-transparent opacity-30 absolute bottom-0 inset-x-0 -mb-6 -mx-6 rounded-b-lg z-0"></div>
-                    <button class="absolute rounded-full py-1 px-3 bg-white bottom-0 focus:outline-none text-gray-400 transition-colors duration-150 hover:text-rose-600" x-on:click="collapsed = false">
-                        <x-heroicon-s-chevron-down class="h-4" />
-                    </button>
+                    <div class="h-48 bg-gradient-to-t from-white to-transparent absolute bottom-0 inset-x-0 pointer-events-none"></div>
+                    <div class="absolute bottom-0 inset-x-0 flex justify-center">
+                        <button class="rounded-full py-1 px-3 bg-gray-200 focus:outline-none text-gray-900" x-on:click="collapsed = false">
+                            <x-heroicon-o-chevron-down class="h-4" />
+                        </button>
+                    </div>
                 </div>
             </div>
         @elseif($mode === 'edit')
