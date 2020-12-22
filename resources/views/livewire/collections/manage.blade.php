@@ -1,3 +1,5 @@
+@section('title', 'Collections')
+
 <div>
     <div class="mb-12 flex items-center justify-between">
         <p class="text-gray-400 font-medium">Collections allow you to publicly share a group of notecards with a link that anyone can access.</p>

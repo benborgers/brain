@@ -1,3 +1,4 @@
+@section('title', $collection->name)
 @section('hide-sidebar', true)
 
 <div>
