@@ -17,6 +17,7 @@
         class="bg-white rounded-lg border border-gray-300 absolute top-6 right-0 origin-top-right shadow w-60 z-10 overflow-hidden divide-y divide-gray-100"
     >
         @foreach ([
+            'Guide to Brain' => route('collections.show', 'guide'),
             'Profile' => route('profile.show'),
             'Collections' => route('collections.manage')
         ] as $name => $url)
@@ -24,6 +25,7 @@
                 href="{{ $url }}"
                 class="block whitespace-nowrap hover:bg-gray-100 transition-colors duration-100 px-4 py-2 select-none
                     @if(url()->current() === $url) font-bold @endif"
+                @if(Str::of($name)->lower()->contains('guide')) target="_blank" @endif
             >
                 {{ $name }}
             </a>
