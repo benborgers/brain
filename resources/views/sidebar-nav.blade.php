@@ -20,7 +20,7 @@
         ] as $name => $url)
             <a
                 href="{{ $url }}"
-                class="block text-gray-900 whitespace-nowrap hover:bg-gray-100 transition-colors duration-100 px-4 py-2
+                class="block text-gray-900 whitespace-nowrap hover:bg-gray-100 transition-colors duration-100 px-4 py-2 select-none
                     @if(url()->current() === $url) font-bold @endif"
             >
                 {{ $name }}
