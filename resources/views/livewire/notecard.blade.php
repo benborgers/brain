@@ -38,7 +38,7 @@
                     katex.renderToString(equation, { throwOnError: false }))"
             >
                 @if($embedded) <a href="{{ route('notecard.show', $notecard) }}"> @endif
-                    <h1 class="text-2xl font-extrabold text-gray-900 mb-4">{{ $notecard->title }}</h1>
+                    <h1 class="text-2xl font-extrabold text-gray-900 mb-4 inline-block">{{ $notecard->title }}</h1>
                 @if($embedded) </a> @endif
                 <div class="prose" x-ref="markdown">
                     {!! $notecard->toHtml() !!}
