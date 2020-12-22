@@ -20,7 +20,7 @@
                         <button class="cursor-pointer focus:outline-none" x-on:click="expandChildren = !expandChildren">
                             @php($showIconClass = 'w-4 text-gray-400')
                             <x-heroicon-s-chevron-right :class="$showIconClass" x-show="expandChildren === false" />
-                            <x-heroicon-s-chevron-down :class="$showIconClass" x-show="expandChildren === true" />
+                            <x-heroicon-s-chevron-down :class="$showIconClass" x-show="expandChildren === true" x-cloak />
                         </button>
                     @else
                         {{-- Spacer to make space on the left --}}
@@ -50,7 +50,7 @@
                 </div>
             </div>
             @if($hasChildren)
-                <div x-show="expandChildren">
+                <div x-show="expandChildren" x-cloak>
                     <x-folder-level :folders="$allFolders->where('parent', $folder->id)" :allFolders="$allFolders" :currentUrl="$currentUrl" :level="$level + 1" />
                 </div>
             @endif
