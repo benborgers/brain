@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+use App\Models\Notecard;
+
 class Collection extends Model
 {
     use HasFactory;
@@ -14,11 +16,13 @@ class Collection extends Model
 
     protected $casts = [ 'notecards' => 'array' ];
 
+    protected $attributes = [ 'notecards' => '[]' ];
+
     protected static function boot()
     {
         parent::boot();
 
-        static::creating(function ($query) {
+        static::creating(function ($model) {
             $key = '';
             while(! $key) {
                 $attempt = friendly_random();
@@ -26,9 +30,20 @@ class Collection extends Model
                     $key = $attempt;
                 }
             }
-            $query->key = $key;
+            $model->key = $key;
+        });
 
-            $query->notecards = [];
+        static::saving(function ($model) {
+            // Only allow attaching notecards if their owner is the current user.
+            $allNotecardsBelongToUser = true;
+            foreach($model->notecards as $notecardId) {
+                $notecard = Notecard::find($notecardId);
+                if(! $notecard->folder->owner->is(auth()->user())) {
+                    $allNotecardsBelongToUser = false;
+                }
+            }
+
+            return $allNotecardsBelongToUser;
         });
     }
 

@@ -41,19 +41,7 @@ class Manage extends Component
     public function updatedCollections($_, $property)
     {
         $index = explode('.', $property)[0];
-        $editedCollection = $this->collections[$index];
-
-        $allNotecardsBelongToThisUser = true;
-        foreach($editedCollection->notecards as $notecardId) {
-            $notecard = Notecard::find($notecardId);
-            if(! $notecard->folder->owner->is(auth()->user())) {
-                $allNotecardsBelongToThisUser = false;
-            }
-        }
-
-        if($allNotecardsBelongToThisUser) {
-            $editedCollection->save();
-        }
+        $this->collections[$index]->save();
     }
 
     public function render()
