@@ -18,8 +18,8 @@
     >
         @foreach ([
             'Guide to Brain' => route('collections.show', 'guide'),
-            'Profile' => route('profile.show'),
-            'Collections' => route('collections.manage')
+            'Collections' => route('collections.manage'),
+            'Profile' => route('profile.show')
         ] as $name => $url)
             <a
                 href="{{ $url }}"
