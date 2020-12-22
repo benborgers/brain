@@ -8,7 +8,12 @@
             x-data="{ expandChildren: localStorage.getItem('brain-sidebar-expand-{{ $folder->id }}') === 'true' ? true : false }"
             x-init="$watch('expandChildren', value => localStorage.setItem('brain-sidebar-expand-{{ $folder->id }}', value))"
         >
-            <div class="flex items-center space-x-3 group px-2 py-1 rounded-lg hover:bg-white border border-transparent hover:border-gray-200 hover:text-gray-900 transition-150 transition-colors">
+            @php($url = route('folder.show', $folder))
+            <div
+                class="flex items-center space-x-3 group px-2 py-1 rounded-lg border border-transparent text-gray-500
+                    hover:bg-white hover:border-gray-200 hover:text-gray-900 transition-150 transition-colors
+                    @if(url()->current() === $url) bg-white border-gray-200 text-gray-900 @endif"
+            >
                 <div class="flex space-x-2">
                     @if($hasChildren)
                         <button class="cursor-pointer focus:outline-none" x-on:click="expandChildren = !expandChildren">
@@ -20,10 +25,10 @@
                         {{-- Spacer to make space on the left --}}
                         <div class="w-4"></div>
                     @endif
-                    <a class="block" href="{{ route('folder.show', $folder) }}">
+                    <a class="block" href="{{ $url }}">
                         {{ $folder->name }}
                         @if($folder->notecards()->exists())
-                            <span class="text-gray-400 inline-block ml-1">{{ $folder->notecards()->count() }}</span>
+                            <span class="text-gray-300 inline-block ml-1">{{ $folder->notecards()->count() }}</span>
                         @endif
                     </a>
                 </div>
