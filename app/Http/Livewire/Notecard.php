@@ -14,6 +14,7 @@ class Notecard extends Component
     public $mode = 'read'; // 'read' or 'edit'
     public $create = false; // are we on create route?
     public $embedded = false;
+    public $currentUrl;
 
     protected $rules = [
         'notecard.title' => 'nullable|max:255',
@@ -33,13 +34,10 @@ class Notecard extends Component
 
             $this->create = true;
         } else {
-            $this->setFolderFromNotecard();
+            $this->folder = Folder::find($this->notecard->folder_id);
         }
-    }
 
-    private function setFolderFromNotecard()
-    {
-        $this->folder = Folder::find($this->notecard->folder_id);
+        $this->currentUrl = url()->current();
     }
 
     public function save()
@@ -55,7 +53,9 @@ class Notecard extends Component
         } else {
             $this->mode = 'read';
 
-            $this->setFolderFromNotecard();
+            if($this->notecard->folder_id !== $this->folder->id) {
+                return redirect($this->currentUrl);
+            }
         }
     }
 
