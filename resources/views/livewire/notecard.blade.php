@@ -61,24 +61,20 @@
             </div>
         @elseif($mode === 'edit')
             <form wire:submit.prevent="save">
-                <input
-                    type="text"
+                <x-autosize-textarea
                     autofocus
                     wire:model.defer="notecard.title"
                     placeholder="Title"
-                    class="w-full p-0 border-none focus:ring-0 text-2xl font-extrabold text-gray-900 mb-4"
+                    class="w-full p-0 border-none focus:ring-0 resize-none text-2xl font-extrabold text-gray-900 mb-4"
                 />
-                <textarea
+                <x-autosize-textarea
                     wire:model.defer="notecard.markdown"
                     placeholder="# Markdown content"
-                    class="w-full p-0 border-none focus:ring-0 resize-none h-64 font-mono text-gray-900"
-                    x-data="{ resize: () => { $el.style.height = '5px'; $el.style.height = $el.scrollHeight + 'px' } }"
+                    class="w-full p-0 border-none focus:ring-0 resize-none font-mono text-gray-900"
                     x-on:keydown.tab.prevent="$el.setRangeText('  ', $el.selectionStart, $el.selectionStart, 'end')"
-                    x-init="resize()"
-                    x-on:input="resize()"
-                    wire:ignore {{-- so dom diffing doesn't change height --}}
-                ></textarea>
+                />
 
+                {{-- Bottom editing bar --}}
                 <div class="mt-6 flex items-center justify-between bg-gray-100 -mb-6 -mx-6 px-6 py-3">
                     <div class="flex items-center space-x-2">
                         @unless($create)
