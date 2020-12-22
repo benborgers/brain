@@ -37,7 +37,7 @@
                 x-init="(() => {
                     $refs.markdown.innerHTML = $refs.markdown.innerHTML.replace(/\$\$(.*?)\$\$/g, (_, equation) =>
                         katex.renderToString(equation, { throwOnError: false }))
-                    if($el.getBoundingClientRect().height > 400 && {{ $embedded ? 'true' : 'false' }}) {
+                    if($refs.markdown.getBoundingClientRect().height > 288 && {{ $embedded ? 'true' : 'false' }}) {
                         collapsed = true
                     }
                 })()"
@@ -46,7 +46,7 @@
                 @if($embedded) <a href="{{ route('notecard.show', $notecard) }}"> @endif
                     <h1 class="text-2xl font-extrabold text-gray-900 mb-4 inline-block">{{ $notecard->title }}</h1>
                 @if($embedded) </a> @endif
-                <div class="prose" x-ref="markdown" :class="{ 'max-h-96 overflow-hidden': collapsed }">
+                <div class="prose" x-ref="markdown" :class="{ 'max-h-72 overflow-hidden': collapsed }">
                     {!! $notecard->toHtml() !!}
                 </div>
 
