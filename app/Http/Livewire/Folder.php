@@ -29,12 +29,23 @@ class Folder extends Component
         return redirect()->route('home');
     }
 
+    private $notecards = [];
+
+    private function addNotecardsInFolder($folder) {
+        $directChildren = $folder->notecards()->inOrder()->get();
+        $directChildren->each(fn ($n) => $this->notecards[] = $n);
+        $nestedFolders = auth()->user()->folders()->where('parent', $folder->id)->get();
+        $nestedFolders->each(fn ($f) => $this->addNotecardsInFolder($f));
+    }
+
     public function render()
     {
         $this->authorize('see-folder', $this->folder);
 
+        $this->addNotecardsInFolder($this->folder);
+
         return view('livewire.folder', [
-            'notecards' => $this->folder->notecards()->inOrder()->get()
+            'notecards' => $this->notecards
         ]);
     }
 }
