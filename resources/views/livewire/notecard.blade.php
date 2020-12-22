@@ -22,12 +22,18 @@
     <div class="bg-white rounded-lg p-6 border border-gray-200 max-w-screen-sm mx-auto">
         @if($create === false && $mode === 'read')
             <div class="flex justify-end">
-                <button
-                    class="text-gray-500 hover:text-gray-800 duration-150 transition-colors focus:outline-none"
-                    wire:click="toggleMode"
-                >
-                    <x-heroicon-o-pencil class="h-4" />
-                </button>
+                <div class="flex items-center space-x-4">
+                    @php($class = 'text-gray-500 hover:text-gray-800 duration-150 transition-colors focus:outline-none')
+                    @unless($embedded)
+                        <button class="{{ $class }}" x-data x-on:click="confirm('Are you sure you want to delete this notecard?') && $wire.destroy()">
+                            <x-heroicon-o-trash class="h-4" />
+                        </button>
+                    @endunless
+
+                    <button class="{{ $class }}" wire:click="toggleMode">
+                        <x-heroicon-o-pencil class="h-4" />
+                    </button>
+                </div>
             </div>
         @endif
 

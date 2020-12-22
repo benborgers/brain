@@ -56,4 +56,10 @@ class Notecard extends Component
         if($this->mode === 'read') $this->mode = 'edit';
         else if($this->mode === 'edit') $this->mode = 'read';
     }
+
+    public function destroy()
+    {
+        $this->notecard->delete();
+        return redirect()->route('folder.show', $this->folder);
+    }
 }

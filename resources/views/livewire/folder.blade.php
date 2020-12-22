@@ -7,7 +7,7 @@
         <div class="flex items-center space-x-4">
             <button
                 x-data
-                x-on:click="confirm('Are you sure? This will also delete all the notecards in {{ $folder->name }}.') && $wire.deleteFolder()"
+                x-on:click="confirm('Are you sure you want to delete your {{ $folder->name }} folder? This will also delete all the notecards inside it.') && $wire.deleteFolder()"
                 class="whitespace-nowrap text-gray-500 rounded-lg focus:outline-none"
             >
                 Delete folder
