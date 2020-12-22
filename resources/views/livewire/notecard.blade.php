@@ -21,7 +21,7 @@
         @endcan
     @endunless
 
-    <div class="bg-white rounded-lg p-6 border border-gray-200 max-w-screen-sm mx-auto overflow-hidden">
+    <section class="bg-white rounded-lg p-6 border border-gray-200 max-w-screen-sm mx-auto overflow-hidden">
         @if(Gate::allows('edit-notecard', $notecard) && $create === false && $mode === 'read')
             <div class="flex justify-end">
                 <button wire:click="toggleMode" wire:key="toggle-mode-{{ $notecard->id }}">
@@ -102,5 +102,5 @@
                 </div>
             </form>
         @endif
-    </div>
+    </section>
 </div>
