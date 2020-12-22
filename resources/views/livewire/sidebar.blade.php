@@ -1,7 +1,11 @@
 <div>
-    <a href="{{ route('home') }}">
-        <p class="mb-4 inline-block text-2xl">🧠</p>
-    </a>
+    <div class="flex items-center justify-between mb-4 ">
+        <a href="{{ route('home') }}">
+            <p class="block text-2xl">🧠</p>
+        </a>
+
+        @include('sidebar-nav')
+    </div>
 
     <x-folder-level :folders="$allFolders->whereNull('parent')" :allFolders="$allFolders" :currentUrl="$currentUrl" />
 
