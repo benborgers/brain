@@ -8,7 +8,7 @@
             <button
                 x-data
                 x-on:click="confirm('Are you sure you want to delete your {{ $folder->name }} folder? This will also delete all the notecards inside it.') && $wire.deleteFolder()"
-                class="whitespace-nowrap text-gray-500 rounded-lg focus:outline-none"
+                class="whitespace-nowrap text-gray-500 rounded-lg"
             >
                 Delete folder
             </button>

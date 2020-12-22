@@ -34,4 +34,9 @@ class Notecard extends Model
     {
         return $this->belongsTo('App\Models\Folder');
     }
+
+    public function scopeInOrder($query)
+    {
+        return $query->orderByDesc('updated_at');
+    }
 }

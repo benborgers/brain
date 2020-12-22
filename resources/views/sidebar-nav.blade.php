@@ -6,6 +6,7 @@
 
     <div
         x-show="open"
+        x-cloak
         x-on:click.away="open = false"
         x-transition:enter="transition ease-out duration-100"
         x-transition:enter-start="transform opacity-0 scale-95"
@@ -16,11 +17,12 @@
         class="bg-white rounded-lg border border-gray-300 absolute top-6 right-0 origin-top-right shadow w-60 z-10 overflow-hidden divide-y divide-gray-100"
     >
         @foreach ([
-            'Profile' => route('profile.show')
+            'Profile' => route('profile.show'),
+            'Collections' => route('collections.manage')
         ] as $name => $url)
             <a
                 href="{{ $url }}"
-                class="block text-gray-900 whitespace-nowrap hover:bg-gray-100 transition-colors duration-100 px-4 py-2 select-none
+                class="block whitespace-nowrap hover:bg-gray-100 transition-colors duration-100 px-4 py-2 select-none
                     @if(url()->current() === $url) font-bold @endif"
             >
                 {{ $name }}
@@ -28,7 +30,7 @@
         @endforeach
         <form action="{{ route('logout') }}" method="post">
             @csrf
-            <input type="submit" value="Log out" class="block cursor-pointer w-full px-4 py-2 bg-white text-left hover:bg-gray-100 transition-colors duration-100 focus:outline-none" />
+            <input type="submit" value="Log out" class="block cursor-pointer w-full px-4 py-2 bg-white text-left hover:bg-gray-100 transition-colors duration-100" />
         </form>
     </div>
 </div>

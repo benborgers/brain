@@ -2,3 +2,7 @@
 .katex .frac-line {
     @apply border-gray-700;
 }
+
+button, input {
+    @apply focus:outline-none;
+}

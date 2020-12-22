@@ -3,12 +3,15 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Models\Notecard as NotecardModel;
 use App\Models\Folder as Folder;
 
 class Notecard extends Component
 {
+    use AuthorizesRequests;
+
     public NotecardModel $notecard;
     public Folder $folder;
     public $mode = 'read'; // 'read' or 'edit'
@@ -42,7 +45,9 @@ class Notecard extends Component
 
     public function save()
     {
+        $this->authorize('edit-notecard', $this->notecard);
         $this->validate();
+
         if(! $this->notecard->folder_id) {
             $this->notecard->folder_id = $this->folder->id;
         }
@@ -69,5 +74,12 @@ class Notecard extends Component
     {
         $this->notecard->delete();
         return redirect()->route('folder.show', $this->folder);
+    }
+
+    public function render()
+    {
+        $this->authorize('see-notecard', $this->notecard);
+
+        return view('livewire.notecard');
     }
 }

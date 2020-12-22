@@ -49,4 +49,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Folder');
     }
+
+    public function notecards()
+    {
+        return $this->hasManyThrough('App\Models\Notecard', 'App\Models\Folder');
+    }
+
+    public function collections()
+    {
+        return $this->hasMany('App\Models\Collection');
+    }
 }

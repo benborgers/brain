@@ -3,11 +3,14 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Models\Folder as FolderModel;
 
 class Folder extends Component
 {
+    use AuthorizesRequests;
+
     public FolderModel $folder;
 
     protected $rules = [
@@ -28,8 +31,10 @@ class Folder extends Component
 
     public function render()
     {
+        $this->authorize('see-folder', $this->folder);
+
         return view('livewire.folder', [
-            'notecards' => $this->folder->notecards()->orderByDesc('updated_at')->get()
+            'notecards' => $this->folder->notecards()->inOrder()->get()
         ]);
     }
 }

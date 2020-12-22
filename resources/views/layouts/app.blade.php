@@ -36,14 +36,16 @@
                         @livewire('sidebar')
                     </div>
                 @endif
-               <main class="p-4 md:p-6 w-full">
+               <main class="p-4 md:p-6 w-full mb-8">
                    {{ $slot }}
                </main>
             </div>
         @endauth
 
         @guest
-            {{ $slot }}
+            <main class="p-4 md:p-6 w-full mb-8">
+                {{ $slot }}
+            </main>
         @endguest
 
         @livewireScripts

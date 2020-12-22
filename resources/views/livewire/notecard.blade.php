@@ -11,21 +11,21 @@
     @section('hide-sidebar', true)
 @endunless
 
-@php($iconClass = 'text-gray-500 hover:text-gray-800 duration-150 transition-colors focus:outline-none')
-
 <div>
     @unless($embedded)
-        <a href="{{ route('folder.show', $folder) }}" class="mb-8 flex space-x-2 items-center duration-100">
-            <x-heroicon-s-arrow-narrow-left class="h-4 text-gray-400" />
-            <span class="text-gray-500 hover:text-gray-900 transition-colors">{{ $folder->name }}</span>
-        </a>
+        @can('see-folder', $folder)
+            <a href="{{ route('folder.show', $folder) }}" class="mb-8 flex space-x-2 items-center duration-100">
+                <x-heroicon-s-arrow-narrow-left class="h-4 text-gray-400" />
+                <span class="text-gray-500 hover:text-gray-900 transition-colors">{{ $folder->name }}</span>
+            </a>
+        @endcan
     @endunless
 
     <div class="bg-white rounded-lg p-6 border border-gray-200 max-w-screen-sm mx-auto overflow-hidden">
-        @if($create === false && $mode === 'read')
+        @if(Gate::allows('edit-notecard', $notecard) && $create === false && $mode === 'read')
             <div class="flex justify-end">
-                <button class="{{ $iconClass }}" wire:click="toggleMode" wire:key="toggle-mode-{{ $notecard->id }}">
-                    <x-heroicon-o-pencil class="h-4" />
+                <button wire:click="toggleMode" wire:key="toggle-mode-{{ $notecard->id }}">
+                    <x-small-icon icon="o-pencil" />
                 </button>
             </div>
         @endif
@@ -90,12 +90,11 @@
                     <div class="flex items-center space-x-4">
                         @unless($create)
                             <button
-                                class="{{ $iconClass }}"
                                 x-data x-on:click="confirm('Are you sure you want to delete this notecard?') && $wire.destroy()"
                                 wire:key="delete-{{ $notecard->id }}"
                                 type="button" {{-- To stop form from submitting --}}
                             >
-                                <x-heroicon-o-trash class="h-4" />
+                                <x-small-icon icon="o-trash" />
                             </button>
                         @endunless
                         <input type="submit" value="{{ $this->notecard->exists ? 'Save' : 'Create' }}" class="cursor-pointer bg-rose-200 text-rose-700 leading-none py-2 px-3 rounded-lg font-semibold focus:outline-none">
