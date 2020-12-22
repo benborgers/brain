@@ -15,7 +15,7 @@
                     <p class="text-gray-400">{{ $notecardsCount }} {{ Str::plural('notecard', $notecardsCount) }}</p>
                 </div>
 
-                <div x-data="{ show: false }" x-cloak>
+                <div x-data="{ show: false }" x-cloak wire:key="select-notecards-for-{{ $collection->id }}">
                     <button class="focus:outline-none bg-gray-200 leading-none py-1 px-3 text-gray-800 text-sm font-bold rounded-full" x-on:click="show = !show">
                         <span x-show="!show">Select notecards</span>
                         <span x-show="show">Hide notecards</span>
@@ -27,11 +27,11 @@
                             	    <input
                             	        type="checkbox"
                                         value="{{ $notecard->id }}"
-                                        id="notecard-{{ $notecard->id }}"
+                                        id="collection-{{ $collection->id }}-notecard-{{ $notecard->id }}"
                             	        wire:model="collections.{{ $i }}.notecards"
                             	        class="rounded border border-gray-300 text-rose-500 bg-gray-100 focus:ring-0 focus:ring-offset-0"
                             	    />
-                            	    <label for="notecard-{{ $notecard->id }}" class="select-none">{{ $notecard->title }}</label>
+                            	    <label for="collection-{{ $collection->id }}-notecard-{{ $notecard->id }}" class="select-none">{{ $notecard->title }}</label>
                             	</div>
                             </div>
                         @endforeach
