@@ -57,8 +57,10 @@
                     wire:model.defer="notecard.markdown"
                     placeholder="# Markdown content"
                     class="w-full p-0 border-none focus:ring-0 resize-none h-64 font-mono text-gray-900"
-                    x-data
+                    x-data="{ resize: () => { $el.style.height = '5px'; $el.style.height = $el.scrollHeight + 'px' } }"
                     x-on:keydown.tab.prevent="$el.setRangeText('  ', $el.selectionStart, $el.selectionStart, 'end')"
+                    x-init="resize()"
+                    x-on:input="resize()"
                 ></textarea>
                 <input type="submit" value="{{ $this->notecard->exists ? 'Save' : 'Create' }}" class="cursor-pointer bg-rose-200 text-rose-700 py-1 px-3 rounded-lg font-semibold focus:outline-none">
             </form>
