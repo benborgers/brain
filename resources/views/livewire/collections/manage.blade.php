@@ -15,25 +15,17 @@
                     <p class="text-gray-400">{{ $notecardsCount }} {{ Str::plural('notecard', $notecardsCount) }}</p>
                 </div>
 
-                <div x-data="{ show: false }" x-cloak wire:key="select-notecards-for-{{ $collection->id }}">
-                    <button class="focus:outline-none bg-gray-200 leading-none py-1 px-3 text-gray-800 text-sm font-bold rounded-full" x-on:click="show = !show">
-                        <span x-show="!show">Select notecards</span>
-                        <span x-show="show">Hide notecards</span>
-                    </button>
-                    <div x-show="show" class="mt-2">
-                        @foreach ($notecards as $notecard)
-                            <div class="inline-block mb-1 mr-4">
-                            	<div class="flex items-center space-x-2">
-                            	    <input
-                            	        type="checkbox"
-                                        value="{{ $notecard->id }}"
-                                        id="collection-{{ $collection->id }}-notecard-{{ $notecard->id }}"
-                            	        wire:model="collections.{{ $i }}.notecards"
-                            	        class="rounded border border-gray-300 text-rose-500 bg-gray-100 focus:ring-0 focus:ring-offset-0"
-                            	    />
-                            	    <label for="collection-{{ $collection->id }}-notecard-{{ $notecard->id }}" class="select-none">{{ $notecard->title }}</label>
-                            	</div>
-                            </div>
+                <div class="space-y-1 mb-3">
+                    @foreach($collection->notecards as $notecardId)
+                        <x-notecard-checkbox :notecard="App\Models\Notecard::find($notecardId)" :i="$i" appendToId="existing" />
+                    @endforeach
+                </div>
+
+                <div>
+                    <input type="text" wire:model="search.{{ $i }}" class="border-none focus:ring-0 p-0 w-full mb-2" placeholder="Search for notecards to add..." />
+                    <div class="space-y-1">
+                        @foreach(auth()->user()->searchNotecards($search[$i]) ?? [] as $notecard)
+                            <x-notecard-checkbox :notecard="$notecard" :i="$i" />
                         @endforeach
                     </div>
                 </div>

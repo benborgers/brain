@@ -10,6 +10,7 @@ use App\Models\Notecard;
 class Manage extends Component
 {
     public $collections;
+    public $search = [];
 
     protected $rules = [
         'collections.*.name' => 'required|max:255',
@@ -24,6 +25,10 @@ class Manage extends Component
     private function refreshCollections()
     {
         $this->collections = auth()->user()->collections()->inOrder()->get();
+
+        foreach($this->collections as $i => $collection) {
+            $this->search[$i] = '';
+        }
     }
 
     public function create()
