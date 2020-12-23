@@ -22,7 +22,7 @@
                 </div>
 
                 <div>
-                    <input type="text" wire:model="search.{{ $i }}" class="border-none focus:ring-0 p-0 w-full mb-2" placeholder="Search for notecards to add..." />
+                    <input type="text" wire:model="search.{{ $i }}" class="border-gray-200 focus:border-gray-200 bg-gray-100 focus:ring-0 py-1 px-2 rounded w-full mb-2" placeholder="Search for notecards to add..." />
                     <div class="space-y-1">
                         @foreach(auth()->user()->searchNotecards($search[$i]) ?? [] as $notecard)
                             <x-notecard-checkbox :notecard="$notecard" :i="$i" />
