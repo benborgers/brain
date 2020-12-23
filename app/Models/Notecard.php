@@ -15,6 +15,22 @@ class Notecard extends Model
 
     protected $guarded = [];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $key = '';
+            while(! $key) {
+                $attempt = friendly_random();
+                if(! Notecard::where('key', $attempt)->exists()) {
+                    $key = $attempt;
+                }
+            }
+            $model->key = $key;
+        });
+    }
+
     public function toHtml()
     {
         $environment = Environment::createCommonMarkEnvironment();

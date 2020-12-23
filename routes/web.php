@@ -13,4 +13,4 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::get('/collection/{collection:key}', Livewire\Collections\Show::class)->name('collections.show');
-Route::get('/notecard/{notecard}', Livewire\Notecard::class)->name('notecard.show');
+Route::get('/notecard/{notecard:key}', Livewire\Notecard::class)->name('notecard.show');
