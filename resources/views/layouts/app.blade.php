@@ -40,6 +40,8 @@
                    {{ $slot }}
                </main>
             </div>
+
+            @include('search-overlay')
         @endauth
 
         @guest

@@ -45,6 +45,22 @@ class User extends Authenticatable
         return Str::of($this->name)->trim()->split('/ /')[0];
     }
 
+    public function searchNotecards($term)
+    {
+        if(strlen($term) < 3) return null;
+
+        $likeTerm = '%' . $term . '%';
+
+        return $this->notecards()
+            ->where(function ($query) use ($likeTerm) {
+                $query
+                    ->where('title', 'like', $likeTerm)
+                    ->orWhere('markdown', 'like', $likeTerm);
+            })
+            ->inOrder()
+            ->get();
+    }
+
     public function folders()
     {
         return $this->hasMany('App\Models\Folder');
