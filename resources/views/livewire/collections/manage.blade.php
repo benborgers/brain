@@ -3,7 +3,7 @@
 <div>
     <div class="mb-12 flex items-center justify-between">
         <p class="text-gray-400 font-medium">Collections allow you to publicly share a group of notecards with a link that anyone can access.</p>
-        <button wire:click="create" class="bg-rose-200 text-rose-700 leading-none py-2 px-3 rounded-lg font-semibold focus:outline-none">New collection</button>
+        <x-button as="button" wire:click="create">New collection</x-button>
     </div>
 
     <div class="space-y-4">

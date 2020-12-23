@@ -96,7 +96,7 @@
                                 <x-small-icon icon="o-trash" />
                             </button>
                         @endunless
-                        <input type="submit" value="{{ $this->notecard->exists ? 'Save' : 'Create' }}" class="cursor-pointer bg-rose-200 text-rose-700 leading-none py-2 px-3 rounded-lg font-semibold focus:outline-none">
+                        <x-button as="input">{{ $this->notecard->exists ? 'Save' : 'Create' }}</x-button>
                     </div>
                 </div>
             </form>

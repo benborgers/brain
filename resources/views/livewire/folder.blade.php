@@ -12,12 +12,7 @@
             >
                 Delete folder
             </button>
-            <a
-                href="{{ route('notecard.create', [ 'folder' => $folder->id ]) }}"
-                class="whitespace-nowrap bg-rose-200 text-rose-700 leading-none py-2 px-3 rounded-lg font-semibold"
-            >
-                Create a notecard
-            </a>
+            <x-button as="a" href="{{ route('notecard.create', [ 'folder' => $folder->id ]) }}">New notecard</x-button>
         </div>
     </div>
 
