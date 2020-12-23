@@ -55,7 +55,10 @@ class User extends Authenticatable
             ->where(function ($query) use ($likeTerm) {
                 $query
                     ->where('title', 'like', $likeTerm)
-                    ->orWhere('markdown', 'like', $likeTerm);
+                    ->orWhere('markdown', 'like', $likeTerm)
+                    ->orWhereHas('folder', function ($query) use ($likeTerm) {
+                        return $query->where('name', 'like', $likeTerm);
+                    });
             })
             ->inOrder()
             ->get();
