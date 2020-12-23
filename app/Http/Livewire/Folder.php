@@ -32,7 +32,7 @@ class Folder extends Component
     private $notecards = [];
 
     private function addNotecardsInFolder($folder) {
-        $directChildren = $folder->notecards()->inOrder()->get();
+        $directChildren = $folder->notecards()->get();
         $directChildren->each(fn ($n) => $this->notecards[] = $n);
         $nestedFolders = auth()->user()->folders()->where('parent', $folder->id)->get();
         $nestedFolders->each(fn ($f) => $this->addNotecardsInFolder($f));
@@ -45,7 +45,7 @@ class Folder extends Component
         $this->addNotecardsInFolder($this->folder);
 
         return view('livewire.folder', [
-            'notecards' => $this->notecards
+            'notecards' => collect($this->notecards)->sortByDesc('updated_at')
         ]);
     }
 }
