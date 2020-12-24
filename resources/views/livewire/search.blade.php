@@ -12,7 +12,7 @@
 
         if(!value) {
             setTimeout(() => {
-                Livewire.emit('clear-search')
+                input = ''
             }, 500)
         }
     });
