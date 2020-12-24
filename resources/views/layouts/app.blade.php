@@ -41,7 +41,7 @@
                </main>
             </div>
 
-            @include('search-overlay')
+            @livewire('search')
         @endauth
 
         @guest

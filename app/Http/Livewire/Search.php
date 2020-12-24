@@ -7,6 +7,7 @@ use Livewire\Component;
 class Search extends Component
 {
     public $input = '';
+    public $totalResults = 0;
 
     protected $listeners = ['clear-search' => 'clear'];
 
@@ -17,6 +18,8 @@ class Search extends Component
 
     public function getResultsProperty()
     {
-        return auth()->user()->searchNotecards($this->input);
+        $results = auth()->user()->searchNotecards($this->input);
+        $this->totalResults = count($results ?? []);
+        return $results;
     }
 }
